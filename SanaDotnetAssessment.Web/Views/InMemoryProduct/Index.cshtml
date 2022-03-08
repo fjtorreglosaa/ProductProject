@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SanaDotnetAssessment.Web.Core.Domain.Product>
+
+@{
+    ViewBag.Title = "List of In Memory Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of In Memory Products</h2>
+
+<p>
+    @Html.ActionLink("Create New In Memory Product", "New", "InMemoryProduct", new { @class = "btn btn-primary" })
+</p>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th style="text-align:center">#</th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th style="text-align:center">Action</th>
+    </tr>
+    @{ int i = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+               @i
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td style="text-align:center">
+               @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+            </td>
+        </tr>
+        { i++; }
+    }
+
+</table>

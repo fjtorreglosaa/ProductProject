@@ -1,0 +1,47 @@
+﻿@model SanaDotnetAssessment.Web.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Product Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product</h2>
+
+
+@using (Html.BeginForm("CreateProduct", "Product", FormMethod.Post))    
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Product.ProductName)
+                    @Html.TextBoxFor(m => m.Product.ProductName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.ProductName)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Product.Price)
+                    @Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Price)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Product.ProductCategories)
+                    @Html.ListBoxFor(m => m.SelectedCategoryIds, Model.Categories, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Product.ProductCategories)
+                </div>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Product List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
